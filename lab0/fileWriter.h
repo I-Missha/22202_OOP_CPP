@@ -1,5 +1,5 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
 #ifndef LAB0_FILEWRITER_H
@@ -11,12 +11,12 @@
 #include <unordered_map>
 using namespace std;
 
-class fileWriter {
+class FileWriter {
 private:
     string filename;
     fstream f;
 public:
-    fileWriter(string file_name);
+    FileWriter(string file_name);
     void createFile();
     void closeFile();
     void writeData(vector<pair<string, int>> data_vec);

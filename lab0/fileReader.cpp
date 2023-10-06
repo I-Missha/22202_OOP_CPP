@@ -1,38 +1,38 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
-#include "fileReader.h"
+#include "FileReader.h"
 #include <string>
 using namespace std;
 
-fileReader::fileReader(string filename) {
+FileReader::FileReader(string filename) {
     file_name = std::move(filename);
 }
 
-void fileReader::open() {
+void FileReader::open() {
     f.open(file_name);
 }
 
-string fileReader::getNext() {
+string FileReader::getNext() {
     string new_line;
     getline(f, new_line);
     return new_line;
 }
 
-void fileReader::close() {
+void FileReader::close() {
     f.close();
 }
 
-void fileReader::reset() {
+void FileReader::reset() {
     f.clear();
     f.seekg(0);
 }
 
-bool fileReader::hasNext() {
+bool FileReader::hasNext() {
     return f.peek() != EOF;
 }
 
-bool fileReader::isOpen() {
+bool FileReader::isOpen() {
     return f.is_open();
 }

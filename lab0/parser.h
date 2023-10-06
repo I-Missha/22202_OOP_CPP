@@ -1,5 +1,5 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
 #ifndef LAB0_PARSER_H
@@ -13,16 +13,17 @@
 
 using namespace std;
 
-class parser {
+class Parser {
 private:
     string str;
 public:
-    explicit parser(string line);
+    explicit Parser(string line);
 
     vector<pair<string, int>> countWords();
 
 
 //    static bool isLetter(unsigned char symbol);
 };
+
 
 #endif //LAB0_PARSER_H

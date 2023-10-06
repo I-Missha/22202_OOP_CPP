@@ -1,10 +1,9 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
 #ifndef LAB0_FILEREADER_H
 #define LAB0_FILEREADER_H
-
 
 #include <iostream>
 #include <fstream>
@@ -12,14 +11,14 @@
 
 using namespace std;
 
-class fileReader {
+class FileReader {
 
 private:
     string file_name;
     ifstream f;
 
 public:
-    explicit fileReader(string filename);
+    explicit FileReader(string filename);
 
     // can return error
     string getNext();

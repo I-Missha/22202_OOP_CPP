@@ -1,24 +1,24 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
-#include "staticData.h"
+#include "StaticData.h"
 #include <algorithm>
 #include <utility>
 using namespace std;
 
-staticData::staticData(unordered_map<string, int> input) {
+StaticData::StaticData(unordered_map<string, int> input) {
     data_map = std::move(input);
 }
 
-void staticData::addData(vector<pair<string, int>> vec) {
+void StaticData::addData(vector<pair<string, int>> vec) {
     for (int i = 0; i < vec.size(); i++) {
         data_map.try_emplace(vec[i].first, 0);
         data_map[vec[i].first] += vec[i].second;
     }
 }
 
-void staticData::dataMapToVec() {
+void StaticData::dataMapToVec() {
     unordered_map<string, int>::iterator i;
     for (i = data_map.begin(); i != data_map.end(); i++) {
         data_vec.emplace_back(i->first, i->second);
@@ -30,10 +30,10 @@ bool comparator(pair<string, int> p1, pair<string, int> p2){
     return p2.second < p1.second;
 }
 
-void staticData::sortData() {
+void StaticData::sortData() {
     sort(data_vec.begin(), data_vec.end(), comparator);
 }
 
-vector<pair<string, int>> staticData::getVecData() {
+vector<pair<string, int>> StaticData::getVecData() {
     return data_vec;
 }

@@ -1,17 +1,17 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
-#include "parser.h"
+#include "Parser.h"
 #include <vector>
 #include <string>
 using namespace std;
 
-parser::parser(std::string line) {
+Parser::Parser(std::string line) {
     str = std::move(line);
 }
 
-vector<pair<string, int>> parser::countWords() {
+vector<pair<string, int>> Parser::countWords() {
     vector<string> words;
     string word;
     str += " ";

@@ -1,5 +1,5 @@
 //
-// Created by Obryv on 30.09.2023.
+// Created by Obryv on 06.10.2023.
 //
 
 #ifndef LAB0_STATICDATA_H
@@ -12,20 +12,17 @@
 
 using namespace std;
 
-
-class staticData {
+class StaticData {
 private:
     unordered_map<string, int> data_map;
     vector<pair<string, int>> data_vec;
 public:
-    explicit staticData(unordered_map<string, int>);
+    explicit StaticData(unordered_map<string, int>);
 
     void addData(vector<pair<string, int>> words);
     void dataMapToVec();
     void sortData();
     vector<pair<string, int>> getVecData();
 };
-
-
 
 #endif //LAB0_STATICDATA_H
