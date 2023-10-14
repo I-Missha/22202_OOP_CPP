@@ -19,7 +19,7 @@ private:
 public:
     explicit Parser(string line);
 
-    vector<pair<string, int>> countWords();
+    vector<string> parse();
 
 
 //    static bool isLetter(unsigned char symbol);

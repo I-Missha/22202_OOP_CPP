@@ -7,21 +7,25 @@
 #include <iostream>
 using namespace std;
 
-FileWriter::FileWriter(std::string file_name) {
+FileWriterTest::FileWriterTest(std::string file_name) {
     filename = std::move(file_name);
 }
 
-void FileWriter::createFile() {
+void FileWriterTest::createFile() {
     f.open(filename,ios::out);
 }
 
-void FileWriter::writeData(vector<pair<string, int>> data_vec) {
+void FileWriterTest::writeData(vector<pair<string, int>> data_vec) {
+    long long counter = 0;
     for (int i = 0; i < data_vec.size(); i++) {
-        f << data_vec[i].first << ";" << data_vec[i].second << "\n";
+        counter += data_vec[i].second;
+    }
+    for (int i = 0; i < data_vec.size(); i++) {
+        f << data_vec[i].first << ";" << data_vec[i].second << ";" << (double)data_vec[i].second / (double)counter * 100 <<"\n";
     }
 }
 
-void FileWriter::closeFile() {
+void FileWriterTest::closeFile() {
     f.close();
 }
 

@@ -12,14 +12,13 @@
 
 using namespace std;
 
-class StaticData {
+class StaticDataTest {
 private:
     unordered_map<string, int> data_map;
     vector<pair<string, int>> data_vec;
 public:
-    explicit StaticData(unordered_map<string, int>);
-
-    void addData(vector<pair<string, int>> words);
+    explicit StaticDataTest();
+    void addData(vector<string> words);
     void dataMapToVec();
     void sortData();
     vector<pair<string, int>> getVecData();

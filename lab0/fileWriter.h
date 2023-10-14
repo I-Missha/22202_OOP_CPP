@@ -11,12 +11,12 @@
 #include <unordered_map>
 using namespace std;
 
-class FileWriter {
+class FileWriterTest {
 private:
     string filename;
     fstream f;
 public:
-    FileWriter(string file_name);
+    FileWriterTest(string file_name);
     void createFile();
     void closeFile();
     void writeData(vector<pair<string, int>> data_vec);
