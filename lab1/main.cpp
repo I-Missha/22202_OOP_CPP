@@ -1,6 +1,11 @@
-#include <iostream>
+#include "BitArray.h"
+
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    BitArray a(64, 2);
+    a.set();
+//    a.resize(95, 1);
+    a.to_string();
     return 0;
 }
