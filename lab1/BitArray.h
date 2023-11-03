@@ -22,14 +22,12 @@ private:
 
     class Bit {
     private:
-        vector<uint> *bitArr;
-        int size;
+        BitArray *BitArr;
+        int ind;
     public:
-        Bit(vector<uint> *arr, int i);
-
-        Bit& operator=(const Bit& b);
+        Bit(BitArray *BitArray, int i);
+        Bit& operator=(bool val);
     };
-
 
 public:
     BitArray(); // ??? заранее объявлен конструктор ??
@@ -40,7 +38,7 @@ public:
     explicit BitArray(int num_bits, unsigned int value = 0);
     BitArray(const BitArray& b); // duplicate bitArr to this bitArr
 
-
+    int getBit(int ind) const;
     //Обменивает значения двух битовых массивов.
     void swap(BitArray& b);
 
@@ -88,24 +86,24 @@ public:
     //Битовая инверсия
     BitArray operator~() const;
     //Подсчитывает количество единичных бит.
-//    int count() const;
+    int count() const;
 
 
     //Возвращает значение бита по индексу i.
-//    bool operator[](int i) const;
+    Bit operator[](int i);
 
-//    int size() const;
-//    bool empty() const;
+    int size() const;
+    bool empty() const;
 
     //Возвращает строковое представление массива.
-    std::string to_string() const;
+    string to_string() const;
 };
 
-//bool operator==(const BitArray & a, const BitArray & b);
-//bool operator!=(const BitArray & a, const BitArray & b);
+bool operator==(const BitArray & a, const BitArray & b);
+bool operator!=(const BitArray & a, const BitArray & b);
 //
-//BitArray operator&(const BitArray& b1, const BitArray& b2);
+BitArray operator&(const BitArray& b1, const BitArray& b2);
 BitArray operator|(const BitArray& b1, const BitArray& b2);
-//BitArray operator^(const BitArray& b1, const BitArray& b2);
+BitArray operator^(const BitArray& b1, const BitArray& b2);
 
 #endif //LAB1_BITARRAY_H

@@ -70,7 +70,7 @@ BitArray BitArray::operator>>(int n) const {
 BitArray::BitArray() = default;
 BitArray::~BitArray() = default;
 
-BitArray::BitArray(int num_bits, unsigned int value) {
+BitArray::BitArray(int num_bits, uint value) {
 //    value = num, but num_bits is less than ELEMENT_SIZE
     int flag = 0;
     if (num_bits % ELEMENT_SIZE != 0) {
@@ -93,12 +93,13 @@ BitArray::BitArray(const BitArray& b) {
 }
 
 
-// rewrite
+
 string BitArray::to_string() const {
+    string str = "";
     for (int i = 0; i < bitArr.size(); i++){
-        cout << bitArr[i];
+        str += std::to_string(this->getBit(i));
     }
-    return std::__cxx11::string();
+    return str;
 }
 
 void BitArray::swap(BitArray& b) {
@@ -250,13 +251,87 @@ void BitArray::increaseBitArray(int num_bits, bool value) {
     }
 }
 
-BitArray::Bit::Bit(vector<unsigned int> *arr, int i) {
-    this->bitArr = arr;
-    this->size = i;
+
+
+int BitArray::getBit(int ind) const{
+//    error
+    int elementPosition = ind / ELEMENT_SIZE;
+    uint bitPosition = 1 << ( 7 - ind % ELEMENT_SIZE);
+    return this->bitArr[elementPosition] & bitPosition;
 }
 
-BitArray::Bit &BitArray::Bit::operator=(const BitArray::Bit &b) {
+BitArray::Bit::Bit(BitArray *BitArray, int i) {
+    this->BitArr = BitArray;
+    this->ind = i;
+}
 
+BitArray::Bit &BitArray::Bit::operator=(bool val) {
+    this->BitArr->set(ind, val);
+    return *this;
+}
+
+BitArray::Bit BitArray::operator[](int i){
+    if (i > bitArrSize) {
+        resize(i);
+    } else if (i < 0) {
+//        error
+    }
+    return Bit(this, i);
+}
+
+int BitArray::count() const{
+    int counter = 0;
+    for (int i = 0; i < bitArr.size(); i++) {
+        for (int j = 0; j < ELEMENT_SIZE; j++) {
+            counter += bitArr[i] & (1 << j);
+        }
+    }
+    return counter;
+}
+
+int BitArray::size() const{
+    return bitArrSize;
+}
+
+bool BitArray::empty() const {
+    return bitArrSize > 0;
+}
+
+bool operator==(const BitArray &a, const BitArray &b) {
+    if (a.size() != b.size()) {
+        return false;
+    }
+    for (int i = 0; i < a.size(); i++) {
+        if (a.getBit(i) != b.getBit(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool operator!=(const BitArray &a, const BitArray &b) {
+    return !(a == b);
+}
+
+BitArray operator&(const BitArray &b1, const BitArray &b2) {
+//    error
+    BitArray res = BitArray(b1);
+    res &= b2;
+    return res;
+}
+
+BitArray operator|(const BitArray &b1, const BitArray &b2) {
+//    error
+    BitArray res = BitArray(b1);
+    res |= b2;
+    return res;
+}
+
+BitArray operator^(const BitArray &b1, const BitArray &b2) {
+//    error
+    BitArray res = BitArray(b1);
+    res ^= b2;
+    return res;
 }
 
 
