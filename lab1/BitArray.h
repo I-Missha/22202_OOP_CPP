@@ -10,6 +10,7 @@
 #include <vector>
 #include <climits>
 #include <iostream>
+#include "Error.cpp"
 
 using namespace std;
 
@@ -17,6 +18,8 @@ class BitArray {
 private:
     vector<unsigned int> bitArr;
     unsigned int bitArrSize = 0;
+
+    // increase/decrease bit array by bit shifts
     void decreaseBitArray(int num_bits);
     void increaseBitArray(int num_bits, bool value);
 
@@ -30,78 +33,81 @@ private:
     };
 
 public:
-    BitArray(); // ??? заранее объявлен конструктор ??
+    BitArray();
     ~BitArray();
 
-    //Конструирует массив, хранящий заданное количество бит.
-    //Первые sizeof(int) <32> бит можно инициализровать с помощью параметра value.
+
+    //construct an array that stores given number of bits
+    //first sizeof(unsigned int) <32> bits we can initialize a value using value parametr.
     explicit BitArray(int num_bits, unsigned int value = 0);
     BitArray(const BitArray& b); // duplicate bitArr to this bitArr
 
+    //return bitArr[ind] value
     int getBit(int ind) const;
-    //Обменивает значения двух битовых массивов.
+    //swap values of two bit arrays
     void swap(BitArray& b);
 
+    //overload operator =,
     BitArray& operator=(const BitArray& b);
 
 
-    //Изменяет размер массива. В случае расширения, новые элементы
-    //инициализируются значением value.
+    //resize array. expand array if necessary
+    //initialize value by given value.
     void resize(int num_bits, bool value = false);
-    //Очищает массив.
+    //clear the array.
     void clear();
-    //Добавляет новый бит в конец массива. В случае необходимости
-    //происходит перераспределение памяти.
+    // add new bit in the end of array. reallocation of memory if necessary
     void push_back(bool bit);
 
 
-    //Битовые операции над массивами.
-    //Работают только на массивах одинакового размера.
-    //Обоснование реакции на параметр неверного размера входит в задачу.
+    // bit operations on arrays. only work if size of arrays are equal
     BitArray& operator&=(const BitArray& b);
     BitArray& operator|=(const BitArray& b);
     BitArray& operator^=(const BitArray& b);
 
-    //Битовый сдвиг с заполнением нулями.
+    //zero filled bit shift.
     BitArray& operator<<=(int n);
     BitArray& operator>>=(int n);
     BitArray operator<<(int n) const;
     BitArray operator>>(int n) const;
 
 
-    //Устанавливает бит с индексом n в значение val.
-    BitArray& set(int n, bool val = true);
-    //Заполняет массив истиной.
-    BitArray& set();
+    //sets the bit with index n to the value
+    void set(int n, bool val = true);
+    //fills the bit array with true
+    void set();
 
-    //Устанавливает бит с индексом n в значение false.
-    BitArray& reset(int n);
+    //sets bit with index n with false value
+    void reset(int n);
     //Заполняет массив ложью.
     BitArray& reset();
 
-    //true, если массив содержит истинный бит.
+    //true if array includes true bit
     bool any() const;
-    //true, если все биты массива ложны.
+    //true if in the array all bits are true
     bool none() const;
-    //Битовая инверсия
+    //bit inversion
     BitArray operator~() const;
-    //Подсчитывает количество единичных бит.
+    //count bits that are true
     int count() const;
 
 
-    //Возвращает значение бита по индексу i.
+    //returns the bit value by index i
+    // operator[] returns class Bit. operator= of class Bit return
     Bit operator[](int i);
 
+    // returns current size of bit array
     int size() const;
+    // true if array is empty
     bool empty() const;
 
-    //Возвращает строковое представление массива.
+    // returns the content of a bit array as a string
     string to_string() const;
 };
 
 bool operator==(const BitArray & a, const BitArray & b);
 bool operator!=(const BitArray & a, const BitArray & b);
-//
+
 BitArray operator&(const BitArray& b1, const BitArray& b2);
 BitArray operator|(const BitArray& b1, const BitArray& b2);
 BitArray operator^(const BitArray& b1, const BitArray& b2);
