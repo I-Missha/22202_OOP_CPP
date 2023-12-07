@@ -7,11 +7,13 @@
 
 #define SIZE_OF_ARRAY 1000
 
-TEST(BitArray, Info) {
+TEST(BitArray, ArrayContentInfo) {
     BitArray b(SIZE_OF_ARRAY, UINT_MAX);
 
-//    ASSERT_FALSE(b.empty());
+    ASSERT_FALSE(b.empty());
     ASSERT_EQ(b.size(), SIZE_OF_ARRAY);
-//    ASSERT_TRUE(b.any());
-//    ASSERT_FALSE(b.none());
+    ASSERT_EQ(b.getBit(0), 1);
+    ASSERT_TRUE(b.any());
+    ASSERT_FALSE(b.none());
 }
+

@@ -13,15 +13,17 @@
 #include "Error.cpp"
 
 using namespace std;
-
 class BitArray {
 private:
     vector<unsigned int> bitArr;
-    unsigned int bitArrSize = 0;
+    int currSize = 0;
+//  store only last significant bit in the array and other zeroes (insignificant bits) we don't store
+// default value is -1, significant value is missing int the array
 
     // increase/decrease bit array by bit shifts
     void decreaseBitArray(int num_bits);
     void increaseBitArray(int num_bits, bool value);
+    int findLastSignBit();
 
     class Bit {
     private:
@@ -44,12 +46,12 @@ public:
 
     //return bitArr[ind] value
     int getBit(int ind) const;
+
     //swap values of two bit arrays
     void swap(BitArray& b);
 
     //overload operator =,
     BitArray& operator=(const BitArray& b);
-
 
     //resize array. expand array if necessary
     //initialize value by given value.
@@ -64,6 +66,8 @@ public:
     BitArray& operator&=(const BitArray& b);
     BitArray& operator|=(const BitArray& b);
     BitArray& operator^=(const BitArray& b);
+    //bit inversion
+    BitArray operator~() const;
 
     //zero filled bit shift.
     BitArray& operator<<=(int n);
@@ -86,8 +90,6 @@ public:
     bool any() const;
     //true if in the array all bits are true
     bool none() const;
-    //bit inversion
-    BitArray operator~() const;
     //count bits that are true
     int count() const;
 
