@@ -64,4 +64,9 @@ void BitArray::clear() {
     bitArr.clear();
 }
 
+void BitArray::push_back(bool value) {
+    resize(currSize + 1, value);
+}
+
+
 
