@@ -110,4 +110,64 @@ BitArray BitArray::operator~() const {
     return invertedBitArr;
 }
 
+BitArray& BitArray::operator>>=(int n) {
+    if ( n < 0 ) {
+        throw Error("Number of bit shifts can't be negative");
+    }
+    if ( n > currSize) {
+        this->reset();
+        return *this;
+    }
+    int blocksNum = n / SIZE_OF_BLOCK;
+    if ( blocksNum > 0) {
+        for (int i = bitArr.size() - 1; i >= blocksNum; i--) {
+            bitArr[i] = bitArr[i - blocksNum];
+        }
+
+        for (int i = 0; i < blocksNum; i++) {
+            bitArr[i] = 0;
+        }
+    }
+
+    int bitsNum = n % SIZE_OF_BLOCK;
+    if (bitsNum > 0) {
+        for (int i = bitArr.size() - 1; i > blocksNum; i--) {
+            bitArr[i] >>= bitsNum;
+            bitArr[i] |= (bitArr[i - 1] << (SIZE_OF_BLOCK - n % SIZE_OF_BLOCK));
+        }
+        bitArr[blocksNum] >>= bitsNum;
+        bitArr[bitArr.size() - 1] &= (MAX_BLOCK_VALUE << (MAX_BLOCK_VALUE - bitsNum));
+    }
+    return *this;
+}
+
+BitArray& BitArray::operator<<=(int n) {
+    if ( n < 0 ) {
+        throw Error("Number of bit shifts can't be negative");
+    }
+    if ( n > currSize) {
+        this->reset();
+        return *this;
+    }
+    int blocksNum = n / SIZE_OF_BLOCK;
+    if ( blocksNum > 0) {
+        for (int i = 0; i < bitArr.size() - blocksNum; i++) {
+            bitArr[i] = bitArr[i + blocksNum];
+        }
+
+        for (int i = bitArr.size() - 1; i >= bitArr.size() - blocksNum; i--) {
+            bitArr[i] = 0;
+        }
+    }
+
+    int bitsNum = n % SIZE_OF_BLOCK;
+    if (bitsNum > 0) {
+        for (int i = 0; i < bitArr.size() - blocksNum; i++) {
+            bitArr[i] <<= bitsNum;
+            bitArr[i] |= (bitArr[i + 1] >> (SIZE_OF_BLOCK - n % SIZE_OF_BLOCK));
+        }
+        bitArr[bitArr.size() - blocksNum - 1] <<= bitsNum;
+    }
+    return *this;
+}
 

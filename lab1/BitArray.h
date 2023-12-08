@@ -69,7 +69,7 @@ public:
     //bit inversion
     BitArray operator~() const;
 
-    //zero filled bit shift.
+    //bit shift.
     BitArray& operator<<=(int n);
     BitArray& operator>>=(int n);
     BitArray operator<<(int n) const;
