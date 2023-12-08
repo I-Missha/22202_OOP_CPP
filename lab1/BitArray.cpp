@@ -33,10 +33,9 @@ void BitArray::swap(BitArray& b) {
 }
 
 BitArray& BitArray::operator=(const BitArray& b) {
-    this->currSize = b.currSize;
-    for (int i = 0; i < bitArr.size() - 1; i++) {
-
-    }
+    bitArr = b.bitArr;
+    currSize = b.currSize;
+    return *this;
 }
 
 void BitArray::resize(int new_num_bits, bool value) {
