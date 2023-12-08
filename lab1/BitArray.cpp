@@ -219,3 +219,37 @@ BitArray& BitArray::reset() {
     }
     return *this;
 }
+
+bool BitArray::any() const{
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        if (bitArr[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool BitArray::none() const{
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        if (!bitArr[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int BitArray::count() const{
+    int count = 0;
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        count += __builtin_popcountll(bitArr[i]);
+    }
+    return count;
+}
+
+int BitArray::size() const{
+    return currSize;
+}
+
+bool BitArray::empty() const {
+    return currSize > 0;
+}
