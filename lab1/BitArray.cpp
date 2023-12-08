@@ -68,5 +68,33 @@ void BitArray::push_back(bool value) {
     resize(currSize + 1, value);
 }
 
+BitArray& BitArray::operator&=(const BitArray& b) {
+    if (currSize != b.currSize) {
+        throw Error("Size of arrays have to be equal");
+    }
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        bitArr[i] &= b.bitArr[i];
+    }
+    return *this;
+}
 
+BitArray& BitArray::operator|=(const BitArray& b) {
+    if (currSize != b.currSize) {
+        throw Error("Size of arrays have to be equal");
+    }
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        bitArr[i] |= b.bitArr[i];
+    }
+    return *this;
+}
+
+BitArray& BitArray::operator^=(const BitArray& b) {
+    if (currSize != b.currSize) {
+        throw Error("Size of arrays have to be equal");
+    }
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        bitArr[i] ^= b.bitArr[i];
+    }
+    return *this;
+}
 
