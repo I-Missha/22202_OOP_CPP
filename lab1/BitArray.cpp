@@ -171,3 +171,20 @@ BitArray& BitArray::operator<<=(int n) {
     return *this;
 }
 
+BitArray BitArray::operator>>(int n) const{
+    if (n < 0) {
+        throw Error("Number of bit shifts can't be negative");
+    }
+    BitArray shiftedBitArr(*this);
+    shiftedBitArr >>= n;
+    return shiftedBitArr;
+}
+
+BitArray BitArray::operator<<(int n) const{
+    if (n < 0) {
+        throw Error("Number of bit shifts can't be negative");
+    }
+    BitArray shiftedBitArr(*this);
+    shiftedBitArr <<= n;
+    return shiftedBitArr;
+}
