@@ -59,3 +59,9 @@ void BitArray::resize(int new_num_bits, bool value) {
     currSize = new_num_bits;
 }
 
+void BitArray::clear() {
+    currSize = 0;
+    bitArr.clear();
+}
+
+
