@@ -105,6 +105,8 @@ public:
 
     // returns the content of a bit array as a string
     string to_string() const;
+
+    BitArra();
 };
 
 bool operator==(const BitArray & a, const BitArray & b);

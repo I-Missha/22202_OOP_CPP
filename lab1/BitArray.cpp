@@ -98,3 +98,16 @@ BitArray& BitArray::operator^=(const BitArray& b) {
     return *this;
 }
 
+BitArray BitArray::operator~() const {
+    BitArray invertedBitArr(*this);
+    for (int i = 0; i < invertedBitArr.bitArr.size() - 1; i++) {
+        invertedBitArr.bitArr[i] = ~invertedBitArr.bitArr[i];
+    }
+    if (invertedBitArr.currSize % SIZE_OF_BLOCK != 0) {
+        invertedBitArr.bitArr[invertedBitArr.bitArr.size() - 1] &=
+                MAX_BLOCK_VALUE << (SIZE_OF_BLOCK - invertedBitArr.currSize % SIZE_OF_BLOCK);
+    }
+    return invertedBitArr;
+}
+
+
