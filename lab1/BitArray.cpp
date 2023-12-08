@@ -188,3 +188,34 @@ BitArray BitArray::operator<<(int n) const{
     shiftedBitArr <<= n;
     return shiftedBitArr;
 }
+
+void BitArray::set(int n) {
+    if (n < 0) {
+        throw Error("Index must be positive");
+    }
+    bitArr[n / (SIZE_OF_BLOCK - 1)] |= (unsigned int)1 >> (n % SIZE_OF_BLOCK);
+}
+
+void BitArray::reset(int n) {
+    if (n < 0) {
+        throw Error("Index must be positive");
+    }
+    bitArr[n / (SIZE_OF_BLOCK - 1)] = ~((unsigned int)1 >> (n % SIZE_OF_BLOCK));
+}
+
+BitArray& BitArray::set() {
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        bitArr[i] = MAX_BLOCK_VALUE;
+    }
+    if (currSize % SIZE_OF_BLOCK > 0) {
+       bitArr[bitArr.size() - 1] = MAX_BLOCK_VALUE << (SIZE_OF_BLOCK - currSize % SIZE_OF_BLOCK);
+    }
+    return *this;
+}
+
+BitArray& BitArray::reset() {
+    for (int i = 0; i < bitArr.size() - 1; i++) {
+        bitArr[i] = 0;
+    }
+    return *this;
+}

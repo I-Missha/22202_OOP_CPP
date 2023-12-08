@@ -77,9 +77,9 @@ public:
 
 
     //sets the bit with index n to the value
-    void set(int n, bool val = true);
+    void set(int n);
     //fills the bit array with true
-    void set();
+    BitArray& set();
 
     //sets bit with index n with false value
     void reset(int n);
