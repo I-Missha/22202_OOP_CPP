@@ -27,10 +27,10 @@ private:
 
     class Bit {
     private:
-        BitArray *BitArr;
+        BitArray& bitArray;
         int ind;
     public:
-        Bit(BitArray *BitArray, int i);
+        Bit(BitArray& BitArray, int index);
         Bit& operator=(bool val);
     };
 

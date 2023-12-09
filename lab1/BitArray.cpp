@@ -253,3 +253,8 @@ int BitArray::size() const{
 bool BitArray::empty() const {
     return currSize > 0;
 }
+
+BitArray::Bit::Bit(BitArray& b, int index) : bitArray(bitArray) {
+    ind = index;
+    bitArray = b;
+}
