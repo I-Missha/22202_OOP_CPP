@@ -253,3 +253,28 @@ int BitArray::size() const{
 bool BitArray::empty() const {
     return currSize > 0;
 }
+
+BitArray::Bit::Bit(BitArray& b, int index) : bitArray(b) {
+    ind = index;
+}
+
+BitArray::Bit &BitArray::Bit::operator=(bool val) {
+    if (val) {
+        bitArray.set(ind);
+    } else {
+        bitArray.reset(ind);
+    }
+    return *this;
+}
+
+BitArray::Bit BitArray::operator[](int ind) {
+    if (ind < 0 ){
+        throw Error("Index must be positive");
+    }
+    if (ind > currSize) {
+        this->resize(ind);
+    }
+    Bit bit(*this, ind);
+    return bit;
+}
+

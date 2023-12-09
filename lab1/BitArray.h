@@ -21,17 +21,15 @@ private:
 // default value is -1, significant value is missing int the array
 
     // increase/decrease bit array by bit shifts
-    void decreaseBitArray(int num_bits);
-    void increaseBitArray(int num_bits, bool value);
-    int findLastSignBit();
 
     class Bit {
     private:
-        BitArray *BitArr;
+        BitArray& bitArray;
         int ind;
     public:
-        Bit(BitArray *BitArray, int i);
+        Bit(BitArray& BitArray, int index);
         Bit& operator=(bool val);
+//        Bit& operator bool
     };
 
 public:
