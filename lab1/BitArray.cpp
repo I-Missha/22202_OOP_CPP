@@ -252,7 +252,7 @@ int BitArray::size() const{
 }
 
 bool BitArray::empty() const {
-    return currSize > 0;
+    return currSize == 0;
 }
 
 BitArray::Bit::Bit(BitArray& b, int index) : bitArray(b) {
@@ -280,11 +280,11 @@ BitArray::Bit BitArray::operator[](int ind) {
 }
 
 int BitArray::getBit(int ind) const{
-    return bitArr[ind / SIZE_OF_BLOCK] & (1 << (SIZE_OF_BLOCK - ind % SIZE_OF_BLOCK - 1));
+    return ((bitArr[ind / SIZE_OF_BLOCK]) >> (SIZE_OF_BLOCK - ind % SIZE_OF_BLOCK - 1)) & 1;
 }
 
 BitArray::Bit::operator bool() {
-    this->bitArray.getBit(this->ind);
+    return this->bitArray.getBit(this->ind);
 }
 
 string BitArray::to_string()  {

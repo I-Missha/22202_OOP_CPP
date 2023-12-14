@@ -33,8 +33,8 @@ private:
     };
 
 public:
-    BitArray();
-    ~BitArray();
+    BitArray() = default;
+    ~BitArray() = default;
 
 
     //construct an array that stores given number of bits

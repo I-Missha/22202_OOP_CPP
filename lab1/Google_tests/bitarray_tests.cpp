@@ -13,6 +13,8 @@ TEST(BitArray, ArrayContentInfo) {
     ASSERT_FALSE(b.empty());
     ASSERT_EQ(b.size(), SIZE_OF_ARRAY);
     ASSERT_EQ(b.getBit(0), 1);
+    ASSERT_EQ(b.getBit(2), 1);
+    ASSERT_EQ(b.getBit(3), 1);
     ASSERT_TRUE(b.any());
     ASSERT_FALSE(b.none());
 }
