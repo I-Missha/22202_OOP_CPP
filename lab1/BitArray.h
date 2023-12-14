@@ -29,7 +29,7 @@ private:
     public:
         Bit(BitArray& BitArray, int index);
         Bit& operator=(bool val);
-//        Bit& operator bool
+        operator bool();
     };
 
 public:
@@ -44,7 +44,6 @@ public:
 
     //return bitArr[ind] value
     int getBit(int ind) const;
-
     //swap values of two bit arrays
     void swap(BitArray& b);
 
@@ -102,15 +101,18 @@ public:
     bool empty() const;
 
     // returns the content of a bit array as a string
-    string to_string() const;
+    string to_string() ;
+    friend bool operator==(const BitArray & a, const BitArray & b);
+    friend bool operator!=(const BitArray & a, const BitArray & b);
+
+    friend BitArray operator&(const BitArray& b1, const BitArray& b2);
+    friend BitArray operator|(const BitArray& b1, const BitArray& b2);
+    friend BitArray operator^(const BitArray& b1, const BitArray& b2);
 
 };
 
-bool operator==(const BitArray & a, const BitArray & b);
-bool operator!=(const BitArray & a, const BitArray & b);
 
-BitArray operator&(const BitArray& b1, const BitArray& b2);
-BitArray operator|(const BitArray& b1, const BitArray& b2);
-BitArray operator^(const BitArray& b1, const BitArray& b2);
+
+
 
 #endif //LAB1_BITARRAY_H

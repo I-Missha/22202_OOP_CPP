@@ -5,6 +5,7 @@
 #include <iostream>
 #include "BitArray.h"
 #include "Error.cpp"
+#include "string"
 #define SIZE_OF_BLOCK 32
 #define MAX_BLOCK_VALUE 0xffffffff
 using namespace std;
@@ -193,14 +194,14 @@ void BitArray::set(int n) {
     if (n < 0) {
         throw Error("Index must be positive");
     }
-    bitArr[n / (SIZE_OF_BLOCK - 1)] |= (unsigned int)1 >> (n % SIZE_OF_BLOCK);
+    bitArr[n / (SIZE_OF_BLOCK )] |= (unsigned int)1 << (SIZE_OF_BLOCK - n % SIZE_OF_BLOCK - 1);
 }
 
 void BitArray::reset(int n) {
     if (n < 0) {
         throw Error("Index must be positive");
     }
-    bitArr[n / (SIZE_OF_BLOCK - 1)] = ~((unsigned int)1 >> (n % SIZE_OF_BLOCK));
+    bitArr[n / (SIZE_OF_BLOCK)] = ~((unsigned int)1 >> (n % SIZE_OF_BLOCK));
 }
 
 BitArray& BitArray::set() {
@@ -278,3 +279,34 @@ BitArray::Bit BitArray::operator[](int ind) {
     return bit;
 }
 
+int BitArray::getBit(int ind) const{
+    return bitArr[ind / SIZE_OF_BLOCK] & (1 << (SIZE_OF_BLOCK - ind % SIZE_OF_BLOCK - 1));
+}
+
+BitArray::Bit::operator bool() {
+    this->bitArray.getBit(this->ind);
+}
+
+string BitArray::to_string()  {
+    string str = "";
+    for (int i = 0; i < currSize + 1; i++) {
+        str += (*this)[i] ? "1" : "0";
+    }
+    return str;
+}
+
+bool operator==(const BitArray& a, const BitArray& b) {
+    if (a.size() != b.size()) {
+        return false;
+    }
+
+    return a.bitArr == b.bitArr;
+}
+
+bool operator!=(const BitArray& a, const BitArray& b) {
+    if (a.size() != b.size()) {
+        return true;
+    }
+
+    return a.bitArr != b.bitArr;
+}
