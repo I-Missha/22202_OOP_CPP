@@ -310,3 +310,33 @@ bool operator!=(const BitArray& a, const BitArray& b) {
 
     return a.bitArr != b.bitArr;
 }
+
+BitArray operator&(const BitArray& b1, const BitArray& b2) {
+    if (b1.size() != b2.size()) {
+        throw Error("BitArray operands must be of the same size");
+    }
+
+    BitArray newBitarray(b1);
+    newBitarray &= b2;
+    return newBitarray;
+}
+
+BitArray operator|(const BitArray& b1, const BitArray& b2) {
+    if (b1.size() != b2.size()) {
+        throw Error("BitArray operands must be of the same size");
+    }
+
+    BitArray newBitarray(b1);
+    newBitarray |= b2;
+    return newBitarray;
+}
+
+BitArray operator^(const BitArray& b1, const BitArray& b2) {
+    if (b1.size() != b2.size()) {
+        throw Error("BitArray operands must be of the same size");
+    }
+
+    BitArray newBitarray(b1);
+    newBitarray ^= b2;
+    return newBitarray;
+}
