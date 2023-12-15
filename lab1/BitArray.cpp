@@ -194,14 +194,14 @@ void BitArray::set(int n) {
     if (n < 0) {
         throw Error("Index must be positive");
     }
-    bitArr[n / (SIZE_OF_BLOCK )] |= (unsigned int)1 << (SIZE_OF_BLOCK - n % SIZE_OF_BLOCK - 1);
+    bitArr[n / (SIZE_OF_BLOCK )] |= (unsigned int)1 << (SIZE_OF_BLOCK - n % SIZE_OF_BLOCK);
 }
 
 void BitArray::reset(int n) {
     if (n < 0) {
         throw Error("Index must be positive");
     }
-    bitArr[n / (SIZE_OF_BLOCK)] = ~((unsigned int)1 >> (n % SIZE_OF_BLOCK));
+    bitArr[n / (SIZE_OF_BLOCK)] &= ~((unsigned int)1 << (SIZE_OF_BLOCK - n % SIZE_OF_BLOCK));
 }
 
 BitArray& BitArray::set() {
@@ -280,7 +280,7 @@ BitArray::Bit BitArray::operator[](int ind) {
 }
 
 int BitArray::getBit(int ind) const{
-    return ((bitArr[ind / SIZE_OF_BLOCK]) >> (SIZE_OF_BLOCK - ind % SIZE_OF_BLOCK - 1)) & 1;
+    return ((bitArr[ind / SIZE_OF_BLOCK]) >> (SIZE_OF_BLOCK - ind % SIZE_OF_BLOCK)) & 1;
 }
 
 BitArray::Bit::operator bool() {
