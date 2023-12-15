@@ -111,8 +111,4 @@ public:
 
 };
 
-
-
-
-
 #endif //LAB1_BITARRAY_H
