@@ -53,7 +53,7 @@ public:
     //resize array. expand array if necessary
     //initialize value by given value.
     void resize(int num_bits, bool value = false);
-    //clear the array.
+    //clear the array (it sets size ).
     void clear();
     // add new bit in the end of array. reallocation of memory if necessary
     void push_back(bool bit);
